@@ -36,7 +36,7 @@ input,select,textarea{min-width:0;max-width:100%}
 input[type=date],input[type=time]{-webkit-appearance:none;appearance:none;display:block;min-height:47px;text-align:left}
 input::-webkit-date-and-time-value{text-align:left}
 input:focus,textarea:focus,select:focus{outline:2px solid var(--malva2);border-color:var(--vinho2)}
-.row{display:flex;gap:10px}.row>div{flex:1;min-width:0}
+.row{display:flex;gap:10px;align-items:flex-end}.row>div{flex:1;min-width:0}
 .opt{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid #E3D7DC;border-radius:10px;margin:8px 0;cursor:pointer;background:#FCFAFB}
 .opt input{margin-top:4px;accent-color:var(--vinho);width:18px;height:18px;flex:none}
 .opt.sel{border-color:var(--vinho);background:var(--claro)}
@@ -169,8 +169,8 @@ details.termos .cl{font-size:14px;margin:10px 0}
       <label class="opt" style="margin:0;flex:1 1 90px;padding:10px"><input type="radio" name="tipo" value="Externo">Externo</label>
       <label class="opt" style="margin:0;flex:1 1 90px;padding:10px"><input type="radio" name="tipo" value="Residência">Casa</label>
     </div>
-    <div class="row"><div><label for="f_sem">Semanas de gestação no dia</label><input type="number" id="f_sem" min="1" max="42" inputmode="numeric"></div>
-    <div><label for="f_dpp">Data provável do parto *</label><input type="date" id="f_dpp" required></div></div>
+    <div class="row"><div><label for="f_sem">Semanas de gestação</label><input type="number" id="f_sem" min="1" max="42" inputmode="numeric"></div>
+    <div><label for="f_dpp">Data prov. do parto *</label><input type="date" id="f_dpp" required></div></div>
     <label for="f_part">Quem vai participar? (parceiro(a), filhos, pets)</label><input type="text" id="f_part" placeholder="Ex.: marido e filha de 4 anos">
   </div>
 
