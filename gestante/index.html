@@ -170,8 +170,9 @@ details.termos .cl{font-size:14px;margin:10px 0}
       <label class="opt" style="margin:0;flex:1 1 90px;padding:10px"><input type="radio" name="tipo" value="Externo">Externo</label>
       <label class="opt" style="margin:0;flex:1 1 90px;padding:10px"><input type="radio" name="tipo" value="Residência">Casa</label>
     </div>
-    <div class="row"><div><label for="f_sem">Semanas de gestação</label><input type="number" id="f_sem" min="1" max="42" inputmode="numeric"></div>
-    <div><label for="f_dpp">Data prov. do parto *</label><input type="date" id="f_dpp" required></div></div>
+    <div class="row"><div><label for="f_dpp">Data prov. do parto *</label><input type="date" id="f_dpp" required></div>
+    <div><label for="f_sem">Semanas no ensaio</label><input type="number" id="f_sem" min="1" max="42" inputmode="numeric"></div></div>
+    <p class="muted" id="semDica" style="margin:6px 0 0">Quantas semanas de gestação você terá no dia do ensaio. Preenchendo a data do ensaio e a data provável do parto, calculamos sozinhos.</p>
     <label for="f_part">Quem vai participar? (parceiro(a), filhos, pets)</label><input type="text" id="f_part" placeholder="Ex.: marido e filha de 4 anos">
   </div>
 
@@ -310,6 +311,11 @@ function iniciarCliente(dados){
     if(i.type==="checkbox") i.closest(".opt").classList.toggle("sel",i.checked);
     $("#parcBox").classList.toggle("hide",!(document.querySelector('input[name=pag]:checked')?.value==="3"));
   }));
+  let semManual=false; $("#f_sem").addEventListener("input",()=>semManual=true);
+  const calcSem=()=>{ const d=$("#f_data").value, p=$("#f_dpp").value; if(!d||!p||semManual) return;
+    const dias=(new Date(p)-new Date(d))/864e5; const sem=Math.round(40-dias/7);
+    if(sem>=1&&sem<=42){ $("#f_sem").value=sem; $("#semDica").textContent=`No dia do ensaio você estará com cerca de ${sem} semanas. Se não estiver certo, é só corrigir.`; } };
+  $("#f_data").addEventListener("change",calcSem); $("#f_dpp").addEventListener("change",calcSem);
   $("#f_cpf").addEventListener("input",e=>{let v=e.target.value.replace(/\D/g,"").slice(0,11);v=v.replace(/(\d{3})(\d)/,"$1.$2").replace(/(\d{3})(\d)/,"$1.$2").replace(/(\d{3})(\d{1,2})$/,"$1-$2");e.target.value=v;});
   $("#form").addEventListener("submit",e=>{e.preventDefault();gerarPDF();});
 }
@@ -363,7 +369,7 @@ function contratoHTML(f){
   <div class="bl pg"><h2><span class="n">03</span>Informações do ensaio</h2><hr class="pt"><table class="dd">
   <tr><td>Data do ensaio</td><td>${f.data?fdata(f.data):'A combinar por escrito'}</td></tr><tr><td>Horário de início</td><td>${f.hora?esc(f.hora):'A combinar por escrito'}</td></tr>
   <tr><td>Local / endereço</td><td>${f.local?esc(f.local):'A combinar por escrito'}</td></tr><tr><td>Tipo de local</td><td>${linha(f.tipo)}</td></tr>
-  <tr><td>Semanas de gestação no dia</td><td>${linha(f.sem)}</td></tr><tr><td>Data provável do parto (DPP)</td><td>${fdata(f.dpp)}</td></tr>
+  <tr><td>Semanas de gestação no dia do ensaio</td><td>${linha(f.sem)}</td></tr><tr><td>Data provável do parto (DPP)</td><td>${fdata(f.dpp)}</td></tr>
   <tr><td>Quem participa</td><td>${linha(f.part)}</td></tr></table>
   <p class="nt">Se a data, o horário ou o local ainda não estiverem definidos, serão combinados por escrito (WhatsApp ou e-mail) e passarão a fazer parte deste contrato.</p></div>
   <div class="bl"><h2><span class="n">04</span>Valor e forma de pagamento</h2><hr class="pt">
