@@ -232,15 +232,15 @@ function decodeHex(hex){ const b=new Uint8Array(hex.match(/../g).map(h=>parseInt
 const b64u={ enc(u8){ let s=""; u8.forEach(c=>s+=String.fromCharCode(c)); return btoa(s).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,""); },
   dec(t){ t=t.replace(/-/g,"+").replace(/_/g,"/"); while(t.length%4)t+="="; return Uint8Array.from(atob(t),c=>c.charCodeAt(0)); } };
 async function streamBytes(u8,ts){ const st=new Blob([u8]).stream().pipeThrough(ts); return new Uint8Array(await new Response(st).arrayBuffer()); }
-const PAD={p:"Gestante · fotos",pv:550};
+const PAD={p:"Gestante · fotos",pv:550,x:"duplacaptura@gmail.com"};
 function compactar(d){ const o={};
   if(d.n)o.n=d.n; if(d.p!==PAD.p)o.p=d.p; if(d.pv!==PAD.pv)o.v=d.pv;
   if(JSON.stringify(d.i)!==JSON.stringify(ITENS_PADRAO))o.i=d.i;
   if(d.a.length)o.a=d.a.map(a=>a.b?[a.d]:[a.d,a.v]);
   const soma=d.pv+d.a.reduce((s,a)=>s+a.v,0); if(Math.abs(soma-d.t)>.001)o.t=d.t;
-  if(d.x)o.x=d.x; return o; }
+  if(d.x!==PAD.x)o.x=d.x; return o; }
 function expandir(o){ const pv=o.v??PAD.pv; const a=(o.a||[]).map(x=>x.length===1?{d:x[0],v:0,b:true}:{d:x[0],v:x[1],b:false});
-  return {n:o.n||"",p:o.p||PAD.p,pv,i:o.i||ITENS_PADRAO,a,t:o.t??(pv+a.reduce((s,x)=>s+x.v,0)),x:o.x||""}; }
+  return {n:o.n||"",p:o.p||PAD.p,pv,i:o.i||ITENS_PADRAO,a,t:o.t??(pv+a.reduce((s,x)=>s+x.v,0)),x:o.x??PAD.x}; }
 async function encode(d){ const raw=new TextEncoder().encode(JSON.stringify(compactar(d)));
   if(window.CompressionStream){ try{ return "z"+b64u.enc(await streamBytes(raw,new CompressionStream("deflate-raw"))); }catch(e){} }
   return "b"+b64u.enc(raw); }
@@ -290,7 +290,7 @@ function calcTotal(){ const t=Number($("#p_val").value||0)+lerAds().reduce((s,a)
 function iniciarPainel(){
   $("#painel").classList.remove("hide");
   $("#p_itens").value=ITENS_PADRAO.join("\n");
-  $("#p_pix").value=store.get("dc_pix")||"";
+  $("#p_pix").value=PAD.x;
   ["#p_val"].forEach(s=>$(s).addEventListener("input",calcTotal));
   $("#addAd").onclick=()=>adRow();
   adRow(); calcTotal();
