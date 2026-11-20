@@ -32,6 +32,9 @@ label{display:block;font-family:"Questrial";font-size:13px;color:var(--vinho2);m
 input[type=text],input[type=tel],input[type=email],input[type=date],input[type=time],input[type=number],textarea,select{
  width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1px solid #D9CBD1;border-radius:9px;background:#FCFAFB;color:var(--texto)}
 textarea{min-height:120px;resize:vertical}
+input,select,textarea{min-width:0;max-width:100%}
+input[type=date],input[type=time]{-webkit-appearance:none;appearance:none;display:block;min-height:47px;text-align:left}
+input::-webkit-date-and-time-value{text-align:left}
 input:focus,textarea:focus,select:focus{outline:2px solid var(--malva2);border-color:var(--vinho2)}
 .row{display:flex;gap:10px}.row>div{flex:1;min-width:0}
 .opt{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid #E3D7DC;border-radius:10px;margin:8px 0;cursor:pointer;background:#FCFAFB}
