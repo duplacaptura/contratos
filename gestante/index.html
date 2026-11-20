@@ -13,6 +13,7 @@
 
 :root{--vinho:#4B152E;--vinho2:#6B2A48;--malva:#CBBDC2;--malva2:#B49EA8;--claro:#F7F2F4;--texto:#2E2228;--linha:#E6DCE0}
 *{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 html,body{margin:0;background:#F3EEF0;color:var(--texto);font-family:"Josefin",system-ui,sans-serif;font-size:16px;line-height:1.5}
 b,strong{font-weight:700;color:var(--vinho)}
 .wrap{max-width:680px;margin:0 auto;padding:16px 16px 60px}
@@ -240,7 +241,7 @@ const CL = [
  ["11ª","Do caso fortuito e força maior",["Nenhuma das partes será responsabilizada por descumprimento causado por caso fortuito ou força maior (art. 393 do Código Civil). A parte afetada deve comunicar a outra assim que possível, e as partes buscarão uma nova data."]],
  ["12ª","Das falhas técnicas",["Se houver falha técnica em equipamento da CONTRATADA, alheia à sua vontade, que cause a perda total ou parcial das imagens, a CONTRATADA oferecerá um novo ensaio sem custo ou devolverá o valor proporcional ao prejuízo, limitado ao valor deste contrato, à escolha do CONTRATANTE."]],
  ["13ª","Do uso de imagem pela contratada",["13.1|Somente se o CONTRATANTE autorizar na seção 6 deste documento, a CONTRATADA poderá usar as imagens, de forma gratuita, para divulgação profissional em: portfólio, redes sociais, site, materiais gráficos, mídias impressas, exposições e divulgação com fornecedores parceiros do ensaio.","13.2|A CONTRATADA não usará as imagens de forma vexatória, que viole a vida privada do CONTRATANTE, ou em conteúdo pornográfico, violento, discriminatório ou ilícito.","13.3|O CONTRATANTE declara que as demais pessoas adultas que aparecerão nas fotos (como parceiro(a) e familiares) estão de acordo com o uso de imagem escolhido, e que é responsável legal pelos menores de idade fotografados ou obteve a autorização de seus responsáveis. A CONTRATADA fica isenta de reclamações de terceiros sobre direito de imagem decorrentes da falta dessa autorização.","13.4|A autorização pode ser revogada a qualquer momento, por escrito. A partir do pedido, a CONTRATADA não fará novas publicações e removerá as já feitas em seus perfis e site em até 15 (quinze) dias. Materiais já impressos ou distribuídos não podem ser recolhidos."]],
- ["14ª","Dos direitos autorais",["Nos termos da Lei nº 9.610/1998, os direitos autorais das fotografias pertencem à CONTRATADA. O CONTRATANTE pode usar as fotos para fins pessoais, inclusive em suas redes sociais, mencionando a autoria (@duplacaptura). É vedado ao CONTRATANTE aplicar filtros ou edições que alterem a obra e usar as fotos para fins comerciais sem autorização prévia."]],
+ ["14ª","Dos direitos autorais",["Nos termos da Lei nº 9.610/1998, os direitos autorais das fotografias pertencem à CONTRATADA. O CONTRATANTE pode usar as fotos para fins pessoais, inclusive em suas redes sociais, mencionando a autoria (@duplacapturafotografia). É vedado ao CONTRATANTE aplicar filtros ou edições que alterem a obra e usar as fotos para fins comerciais sem autorização prévia."]],
  ["15ª","Da responsabilidade durante o ensaio",["A CONTRATADA não se responsabiliza por perdas ou danos a pertences pessoais do CONTRATANTE ou de terceiros durante o ensaio. O CONTRATANTE declara conhecer as condições do local escolhido."]],
  ["16ª","Do armazenamento das imagens e dos dados pessoais",["16.1|A CONTRATADA manterá cópia das imagens por até 6 (seis) meses após a entrega. Cabe ao CONTRATANTE baixar e guardar seus arquivos; após esse prazo, não há garantia de armazenamento.","16.2|Os dados pessoais informados neste contrato serão usados apenas para a execução do serviço, emissão de cobranças e cumprimento de obrigações legais, nos termos da Lei Geral de Proteção de Dados (Lei nº 13.709/2018), e não serão compartilhados com terceiros fora dessas finalidades."]],
  ["17ª","Das condições gerais",["17.1|Despesas com maquiagem, cabelo, figurino, locação de espaço e transporte do CONTRATANTE são de responsabilidade exclusiva dele.","17.2|Se o CONTRATANTE quiser estender o ensaio no próprio dia, será cobrado o valor de R$ 300,00 por hora adicional, proporcional ao tempo extra e sujeito à disponibilidade da CONTRATADA, pago até a entrega das fotos.","17.3|Qualquer alteração neste contrato (data, local, adicionais) deve ser combinada por escrito, inclusive por WhatsApp ou e-mail.","17.4|Não há vínculo empregatício entre as partes."]],
@@ -369,14 +370,16 @@ function contratoHTML(f){
   ${clausulasHTML()}
   <div class="bl"><h2><span class="n">06</span>Autorização e assinaturas</h2><hr class="pt">
   <h3>Uso de imagem (Cláusula 13ª)</h3>
-  <p class="ck">${ck(f.img==="sim")}<b>Autorizo</b> o uso das minhas imagens pela CONTRATADA para divulgação profissional.</p>
-  <p class="ck">${ck(f.img==="nao")}<b>Não autorizo</b> o uso das minhas imagens pela CONTRATADA.</p>
+  <p class="ck">${ck(f.img==="sim")}<span><b>Autorizo</b> o uso das minhas imagens pela CONTRATADA para divulgação profissional.</span></p>
+  <p class="ck">${ck(f.img==="nao")}<span><b>Não autorizo</b> o uso das minhas imagens pela CONTRATADA.</span></p>
   <h3>Declarações do contratante</h3>
-  <p class="ck">${ck(f.d1)}Estou ciente das minhas responsabilidades sobre a imagem de terceiros presentes no ensaio (Cláusula 13ª, item 13.3).</p>
-  <p class="ck">${ck(f.d2)}Li, compreendi e concordo com todos os termos e condições deste contrato.</p>
+  <p class="ck">${ck(f.d1)}<span>Estou ciente das minhas responsabilidades sobre a imagem de terceiros presentes no ensaio (Cláusula 13ª, item 13.3).</span></p>
+  <p class="ck">${ck(f.d2)}<span>Li, compreendi e concordo com todos os termos e condições deste contrato.</span></p>
   <p style="margin-top:7mm">Goiânia/GO, ${hoje.getDate()} de ${MESES[hoje.getMonth()]} de ${hoje.getFullYear()}.</p>
-  <div class="as"><div><span class="pp">Contratada</span>Marize Tomaz Porto – Dupla Captura<br>CNPJ 49.475.343/0001-00</div>
-  <div><span class="pp">Contratante</span>${esc(f.nome)}<br>CPF ${esc(f.cpf)}</div></div>
+  <div class="as">
+   <div class="col"><div class="box"><span>Assinatura gov.br · Contratada</span></div><div class="ln"><span class="pp">Contratada</span>Marize Tomaz Porto – Dupla Captura<br>CNPJ 49.475.343/0001-00</div></div>
+   <div class="col"><div class="box"><span>Assinatura gov.br · Contratante</span></div><div class="ln"><span class="pp">Contratante</span>${esc(f.nome)}<br>CPF ${esc(f.cpf)}</div></div>
+  </div>
   <p class="nt" style="margin-top:6mm">Assinaturas eletrônicas pelo gov.br (assinador.iti.br), conforme a Cláusula 18ª.</p></div>
   </div>`;
 }
@@ -403,7 +406,7 @@ const DOC_CSS=`.doc{width:178mm;font-family:"Josefin";font-size:11.5pt;line-heig
 .doc .cl p{margin:0 0 1.2mm;text-align:justify}.doc .cl .i{font-weight:700;color:#4B152E;margin-right:1.2mm}
 .doc .ck{display:flex;gap:3mm;align-items:flex-start;margin:0 0 2mm}.doc .cb{flex:none;width:4mm;height:4mm;border:1.2px solid #4B152E;display:inline-flex;align-items:center;justify-content:center;font-size:9pt;line-height:1;color:#4B152E;margin-top:.6mm}
 .doc .vz{display:inline-block;min-width:40mm;border-bottom:1px solid #B49EA8;height:4mm}
-.doc .as{display:flex;gap:10mm;margin-top:12mm}.doc .as div{flex:1;border-top:1.2px solid #4B152E;padding-top:2mm;font-size:10.5pt}.doc .as .pp{font-family:"Questrial";font-size:8pt;letter-spacing:.2em;text-transform:uppercase;color:#6B2A48;display:block;margin-bottom:1mm}`;
+.doc .as{display:flex;gap:8mm;margin-top:8mm}.doc .as .col{flex:1}.doc .as .box{height:34mm;border:1px dashed #CBBDC2;border-radius:3px;background:#FCFAFB;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2mm}.doc .as .box span{font-family:"Questrial";font-size:7pt;letter-spacing:.15em;text-transform:uppercase;color:#B49EA8}.doc .as .ln{border-top:1.2px solid #4B152E;margin-top:3mm;padding-top:2mm;font-size:10.5pt}.doc .as .pp{font-family:"Questrial";font-size:8pt;letter-spacing:.2em;text-transform:uppercase;color:#6B2A48;display:block;margin-bottom:1mm}`;
 
 async function montarPDF(doc){
   const {jsPDF}=window.jspdf; const pdf=new jsPDF({unit:"mm",format:"a4"});
@@ -426,7 +429,7 @@ async function montarPDF(doc){
   }
   const n=pdf.internal.getNumberOfPages();
   for(let p=1;p<=n;p++){pdf.setPage(p);pdf.setFont("helvetica","normal");pdf.setFontSize(7);pdf.setTextColor(180,158,168);
-    pdf.text("DUPLA CAPTURA  ·  (62) 98212-3279  ·  @DUPLACAPTURA",X,289);pdf.text(p+" / "+n,X+W,289,{align:"right"});}
+    pdf.text("DUPLA CAPTURA  ·  (62) 98212-3279  ·  @DUPLACAPTURAFOTOGRAFIA",X,289);pdf.text(p+" / "+n,X+W,289,{align:"right"});}
   return pdf.output("blob");
 }
 async function gerarPDF(){
