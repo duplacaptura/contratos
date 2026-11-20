@@ -349,14 +349,14 @@ function contratoHTML(f){
   <tr><td>Nome completo</td><td>${esc(f.nome)}</td></tr><tr><td>CPF</td><td>${esc(f.cpf)}</td></tr><tr><td>RG</td><td>${linha(f.rg)}</td></tr>
   <tr><td>Data de nascimento</td><td>${fdata(f.nasc)}</td></tr><tr><td>Telefone / WhatsApp</td><td>${esc(f.tel)}</td></tr>
   <tr><td>E-mail</td><td>${esc(f.email)}</td></tr><tr><td>Endereço completo</td><td>${esc(f.end)}</td></tr></table></div>
-  <div class="bl"><h2><span class="n">02</span>Pacote contratado</h2><hr class="pt">
+  <div class="bl pg"><h2><span class="n">02</span>Pacote contratado</h2><hr class="pt">
   <div class="pc"><div class="l"><span class="nm">${esc(D.p)}</span><span class="vl">${brl(D.pv)}</span></div><ul>${D.i.map(s=>`<li>${md(s)}</li>`).join("")}</ul></div></div>
   ${D.a.length?`<div class="bl"><h3>Adicionais e brindes deste contrato</h3><table class="pr"><tr><th>Item</th><th>Valor</th></tr>${D.a.map(a=>`<tr><td>${a.b?'<span class="tg">Brinde</span>':""}${esc(a.d)}</td><td>${brl(a.v)}</td></tr>`).join("")}</table>
   ${D.a.some(a=>a.b)?'<p class="nt">Os brindes são concedidos por cortesia da CONTRATADA, valem apenas para este ensaio e não podem ser convertidos em dinheiro, descontados do valor do pacote ou reembolsados em caso de cancelamento.</p>':""}</div>`:""}
   <div class="bl"><h3>Não inclusos no pacote (cobrados à parte, se contratados)</h3><table class="pr"><tr><th>Item</th><th>Valor</th></tr>
   <tr><td>Hora adicional de ensaio</td><td>R$ 300,00 / hora</td></tr><tr><td>Locação de estúdio</td><td>Conforme o espaço escolhido</td></tr>
   <tr><td>Deslocamento para ensaios fora de Goiânia</td><td>Sob consulta</td></tr><tr><td>Maquiagem, cabelo, figurino e acessórios</td><td>Por conta do CONTRATANTE</td></tr></table></div>
-  <div class="bl"><h2><span class="n">03</span>Informações do ensaio</h2><hr class="pt"><table class="dd">
+  <div class="bl pg"><h2><span class="n">03</span>Informações do ensaio</h2><hr class="pt"><table class="dd">
   <tr><td>Data do ensaio</td><td>${f.data?fdata(f.data):'A combinar por escrito'}</td></tr><tr><td>Horário de início</td><td>${f.hora?esc(f.hora):'A combinar por escrito'}</td></tr>
   <tr><td>Local / endereço</td><td>${f.local?esc(f.local):'A combinar por escrito'}</td></tr><tr><td>Tipo de local</td><td>${linha(f.tipo)}</td></tr>
   <tr><td>Semanas de gestação no dia</td><td>${linha(f.sem)}</td></tr><tr><td>Data provável do parto (DPP)</td><td>${fdata(f.dpp)}</td></tr>
@@ -366,7 +366,7 @@ function contratoHTML(f){
   <p><b>Valor total do contrato:</b> ${brl(D.t)}</p><p><b>Forma de pagamento escolhida:</b> ${pagTxt[f.pag]}</p>
   ${D.x?`<p><b>Chave PIX:</b> ${esc(D.x)}</p>`:""}
   <div class="dq">A data do ensaio só fica reservada após a <b>assinatura deste contrato</b> e o <b>pagamento da entrada</b>.</div></div>
-  <h2 class="brk"><span class="n">05</span>Termos e condições</h2><hr class="pt">
+  <h2 class="brk pg"><span class="n">05</span>Termos e condições</h2><hr class="pt">
   ${clausulasHTML()}
   <div class="bl"><h2><span class="n">06</span>Autorização e assinaturas</h2><hr class="pt">
   <h3>Uso de imagem (Cláusula 13ª)</h3>
@@ -385,16 +385,16 @@ function contratoHTML(f){
 }
 const DOC_CSS=`.doc{width:178mm;font-family:"Josefin";font-size:11.5pt;line-height:1.5;color:#2E2228;background:#fff}
 .doc b{font-weight:700;color:#4B152E}
-.doc .capa{background:#4B152E;color:#fff;border-radius:4px;padding:11mm 11mm 10mm}
+.doc .capa{background:#4B152E;color:#fff;border-radius:4px;padding:8mm 10mm 8mm}
 .doc .topo{font-family:"Questrial";letter-spacing:.32em;font-size:8pt;color:#B49EA8;text-transform:uppercase}
-.doc .lg{margin-top:9mm;display:inline-block;text-align:right;line-height:1}.doc .lg .d{font-family:"Questrial";font-size:40pt;color:#fff}.doc .lg .c{display:block;font-family:"Questrial";font-size:8.5pt;letter-spacing:.28em;margin-top:2pt}
-.doc h1{font-weight:300;font-size:23pt;line-height:1.15;margin:9mm 0 2mm;color:#fff}.doc .sub{font-family:"Questrial";text-transform:uppercase;letter-spacing:.3em;font-size:9pt;color:#CBBDC2}
-.doc .intro{margin:7mm 0 2mm}
+.doc .lg{margin-top:5mm;display:inline-block;text-align:right;line-height:1}.doc .lg .d{font-family:"Questrial";font-size:40pt;color:#fff}.doc .lg .c{display:block;font-family:"Questrial";font-size:8.5pt;letter-spacing:.28em;margin-top:2pt}
+.doc h1{font-weight:300;font-size:21pt;line-height:1.15;margin:5mm 0 1.5mm;color:#fff}.doc .sub{font-family:"Questrial";text-transform:uppercase;letter-spacing:.3em;font-size:9pt;color:#CBBDC2}
+.doc .intro{margin:5mm 0 0}
 .doc h2{font-weight:300;font-size:18pt;color:#4B152E;margin:7mm 0 1mm;line-height:1.2}.doc h2 .n{font-family:"Questrial";font-size:8.5pt;letter-spacing:.25em;color:#B49EA8;display:block;margin-bottom:1mm}
 .doc .pt{border:0;border-top:2px dotted #B49EA8;margin:2mm 0 4mm}
 .doc h3{font-family:"Questrial";font-weight:400;text-transform:uppercase;letter-spacing:.2em;font-size:8.5pt;color:#6B2A48;margin:4mm 0 2mm}
 .doc table{width:100%;border-collapse:collapse;margin:0 0 3mm}
-.doc .dd td{padding:2mm 3mm;border-bottom:1px solid #E6DCE0;vertical-align:top}.doc .dd td:first-child{width:38%;font-family:"Questrial";font-size:9pt;color:#6B2A48}
+.doc .dd td{padding:1.5mm 3mm;border-bottom:1px solid #E6DCE0;vertical-align:top}.doc .dd td:first-child{width:38%;font-family:"Questrial";font-size:9pt;color:#6B2A48}
 .doc .pr th{font-family:"Questrial";font-weight:400;font-size:8pt;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:#4B152E;text-align:left;padding:2mm 3mm}.doc .pr th:last-child,.doc .pr td:last-child{text-align:right;white-space:nowrap}
 .doc .pr td{padding:2mm 3mm;border-bottom:1px solid #E6DCE0}
 .doc .tg{font-family:"Questrial";font-size:7.5pt;letter-spacing:.15em;text-transform:uppercase;background:#4B152E;color:#fff;padding:.5mm 2mm;border-radius:2px;margin-right:2mm}
@@ -411,19 +411,20 @@ const DOC_CSS=`.doc{width:178mm;font-family:"Josefin";font-size:11.5pt;line-heig
 async function montarPDF(doc){
   const {jsPDF}=window.jspdf; const pdf=new jsPDF({unit:"mm",format:"a4"});
   const W=178,X=16,TOP=16,BOT=277; const k=W/doc.offsetWidth;
-  const els=[...doc.children]; const base=doc.getBoundingClientRect().top;
+  const els=[...doc.children].flatMap(e=>e.classList.contains("cl")?[...e.children]:[e]); const base=doc.getBoundingClientRect().top;
   const info=[];
   for(const el of els){
     const r=el.getBoundingClientRect();
     const cv=await html2canvas(el,{scale:2,backgroundColor:"#ffffff",logging:false});
-    info.push({el,top:(r.top-base)*k,h:r.height*k,img:cv.toDataURL("image/jpeg",.9),kwn:el.matches("h2,hr")});
+    info.push({el,top:(r.top-base)*k,h:r.height*k,img:cv.toDataURL("image/jpeg",.9),kwn:el.matches("h2,hr,h4")});
   }
   let y=TOP,prevEnd=null;
   for(let i=0;i<info.length;i++){
     const b=info[i]; const gap=prevEnd===null?0:Math.max(0,b.top-prevEnd);
     let need=b.h; if(b.kwn){let j=i;let end=b.top+b.h;while(info[j]&&info[j].kwn)j++; if(info[j]) end=info[j].top+info[j].h; need=end-b.top;}
     let yy=y+gap;
-    if(yy+need>BOT && y>TOP){ pdf.addPage(); yy=TOP; }
+    if(b.el.classList.contains("pg") && y>TOP){ pdf.addPage(); yy=TOP; }
+    else if(yy+need>BOT && y>TOP){ pdf.addPage(); yy=TOP; }
     pdf.addImage(b.img,"JPEG",X,yy,W,b.h);
     y=yy+b.h; prevEnd=b.top+b.h;
   }
