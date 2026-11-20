@@ -375,12 +375,12 @@ function contratoHTML(f){
   <h3>Declarações do contratante</h3>
   <p class="ck">${ck(f.d1)}<span>Estou ciente das minhas responsabilidades sobre a imagem de terceiros presentes no ensaio (Cláusula 13ª, item 13.3).</span></p>
   <p class="ck">${ck(f.d2)}<span>Li, compreendi e concordo com todos os termos e condições deste contrato.</span></p>
-  <p style="margin-top:7mm">Goiânia/GO, ${hoje.getDate()} de ${MESES[hoje.getMonth()]} de ${hoje.getFullYear()}.</p>
+  <p style="margin-top:4mm">Goiânia/GO, ${hoje.getDate()} de ${MESES[hoje.getMonth()]} de ${hoje.getFullYear()}.</p>
   <div class="as">
    <div class="col"><div class="box"><span>Assinatura gov.br · Contratada</span></div><div class="ln"><span class="pp">Contratada</span>Marize Tomaz Porto – Dupla Captura<br>CNPJ 49.475.343/0001-00</div></div>
    <div class="col"><div class="box"><span>Assinatura gov.br · Contratante</span></div><div class="ln"><span class="pp">Contratante</span>${esc(f.nome)}<br>CPF ${esc(f.cpf)}</div></div>
   </div>
-  <p class="nt" style="margin-top:6mm">Assinaturas eletrônicas pelo gov.br (assinador.iti.br), conforme a Cláusula 18ª.</p></div>
+  <p class="nt" style="margin-top:3mm">Assinaturas eletrônicas pelo gov.br (assinador.iti.br), conforme a Cláusula 18ª.</p></div>
   </div>`;
 }
 const DOC_CSS=`.doc{width:178mm;font-family:"Josefin";font-size:11.5pt;line-height:1.5;color:#2E2228;background:#fff}
@@ -406,7 +406,7 @@ const DOC_CSS=`.doc{width:178mm;font-family:"Josefin";font-size:11.5pt;line-heig
 .doc .cl p{margin:0 0 1.2mm;text-align:justify}.doc .cl .i{font-weight:700;color:#4B152E;margin-right:1.2mm}
 .doc .ck{display:flex;gap:3mm;align-items:flex-start;margin:0 0 2mm}.doc .cb{flex:none;width:4mm;height:4mm;border:1.2px solid #4B152E;display:inline-flex;align-items:center;justify-content:center;font-size:9pt;line-height:1;color:#4B152E;margin-top:.6mm}
 .doc .vz{display:inline-block;min-width:40mm;border-bottom:1px solid #B49EA8;height:4mm}
-.doc .as{display:flex;gap:8mm;margin-top:8mm}.doc .as .col{flex:1}.doc .as .box{height:34mm;border:1px dashed #CBBDC2;border-radius:3px;background:#FCFAFB;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2mm}.doc .as .box span{font-family:"Questrial";font-size:7pt;letter-spacing:.15em;text-transform:uppercase;color:#B49EA8}.doc .as .ln{border-top:1.2px solid #4B152E;margin-top:3mm;padding-top:2mm;font-size:10.5pt}.doc .as .pp{font-family:"Questrial";font-size:8pt;letter-spacing:.2em;text-transform:uppercase;color:#6B2A48;display:block;margin-bottom:1mm}`;
+.doc .as{display:flex;gap:8mm;margin-top:5mm}.doc .as .col{flex:1}.doc .as .box{height:26mm;border:1px dashed #CBBDC2;border-radius:3px;background:#FCFAFB;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2mm}.doc .as .box span{font-family:"Questrial";font-size:7pt;letter-spacing:.15em;text-transform:uppercase;color:#B49EA8}.doc .as .ln{border-top:1.2px solid #4B152E;margin-top:3mm;padding-top:2mm;font-size:10.5pt}.doc .as .pp{font-family:"Questrial";font-size:8pt;letter-spacing:.2em;text-transform:uppercase;color:#6B2A48;display:block;margin-bottom:1mm}`;
 
 async function montarPDF(doc){
   const {jsPDF}=window.jspdf; const pdf=new jsPDF({unit:"mm",format:"a4"});
