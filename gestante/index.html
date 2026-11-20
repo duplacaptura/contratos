@@ -311,10 +311,16 @@ function iniciarPainel(){
   };
 }
 
+// ---------- avisos (planilha + e-mail) ----------
+const AVISOS_URL="https://script.google.com/macros/s/AKfycbx0TtkZyewmRcJxsQ2mr0oep2sABlUDOM4Hya-mz8pJkkY7OpQnOZc1ZgNZOoqA3eG0/exec";
+function avisar(dados){ try{ fetch(AVISOS_URL,{method:"POST",mode:"no-cors",keepalive:true,headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(dados)}).catch(()=>{}); }catch(e){} }
+
 // ---------- CLIENTE ----------
 let D=null;
 function iniciarCliente(dados){
   D=dados; $("#cliente").classList.remove("hide");
+  const chaveAbriu="dc_abriu_"+location.hash.slice(1,60);
+  if(!store.get(chaveAbriu)){ store.set(chaveAbriu,"1"); avisar({evento:"abriu",cliente:D.n,pacote:D.p,total:brl(D.t)}); }
   if(D.n) $("#olaTit").textContent=`Oi, ${D.n}! Que alegria ter você com a gente`;
   $("#c_pacNome").textContent=D.p; $("#c_pacVal").textContent=brl(D.pv);
   $("#c_itens").innerHTML=D.i.map(s=>`<li>${md(s)}</li>`).join("");
@@ -472,6 +478,10 @@ async function gerarPDF(){
     if(document.fonts&&document.fonts.ready) await document.fonts.ready;
     const nomeArq="Contrato Dupla Captura - "+f.nome.split(/\s+/).slice(0,2).join(" ")+".pdf";
     const blob=await montarPDF(box.querySelector(".doc"));
+    const pagCurto={"1":"Opção 1 - entrada 30% + PIX parcelado","2":"Opção 2 - 50% + 50% via PIX","3":"Opção 3 - cartão "+f.parc+"x"}[f.pag];
+    avisar({evento:"pdf",cliente:D.n,nome:f.nome,cpf:f.cpf,rg:f.rg,nasc:fdata(f.nasc),tel:f.tel,email:f.email,end:f.end,
+      pacote:D.p,adicionais:D.a.map(x=>x.d+(x.b?" (brinde)":" "+brl(x.v))).join("; "),total:brl(D.t),pagamento:pagCurto,
+      data:fdata(f.data),hora:f.hora,local:f.local,tipo:f.tipo,sem:f.sem,dpp:fdata(f.dpp),part:f.part,imagem:f.img==="sim"?"Autorizou":"Não autorizou"});
     box.innerHTML="";
     const file=new File([blob],nomeArq,{type:"application/pdf"});
     const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=nomeArq;
